@@ -40,11 +40,12 @@ See [ios-genesis-mega-prompt.md](ios-genesis-mega-prompt.md) for the full templa
 
 This genesis prompt evolved from building multiple iOS apps using AI coding assistants. Every time I encountered a time-consuming detail (like the `ITSAppUsesNonExemptEncryption` setting that blocks TestFlight builds), I added it back to the template so the next app would have it covered from the start.
 
-For the full story and lessons learned, read the blog post: [Vibe Coding iOS Apps: Lessons and the Genesis Mega Prompt](https://dragosroua.com/vibe-coding-ios-apps-lessons-and-the-genesis-mega-prompt/)
-
+For the full story and lessons learned, read the blog posts: 
+- [Vibe Coding iOS Apps: Lessons and the Genesis Mega Prompt](https://dragosroua.com/vibe-coding-ios-apps-lessons-and-the-genesis-mega-prompt/)
+- [Lessons Learned While Vibe Coding an iOS APP in 7 Days, from Idea to AppStore - Genesis Prompt Inside](https://dragosroua.com/lessons-learned-while-vibe-coding-an-ios-app-in-7-days-from-idea-to-app-store-genesis-prompt-inside/)
 ## License
 
-Free to use. Just copy and paste.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## Author
 
