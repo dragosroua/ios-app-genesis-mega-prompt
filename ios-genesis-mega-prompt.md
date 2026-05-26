@@ -263,7 +263,59 @@ pricing display, CTA button styling, restore purchases link, terms &amp; privacy
 
 ---
 
-## 12. Persistence
+## 12. In-App Review Prompt
+
+Use `StoreKit`'s `requestReview` to prompt users at moments of peak satisfaction — never on first launch or after a frustrating event.
+
+### Trigger Conditions
+
+Request a review when the user has clearly derived value:
+- Completed a meaningful action for the Nth time (e.g., finished a session, saved an item, reached a milestone) — `{{REVIEW_TRIGGER_EVENT}}`
+- The app has been launched at least `{{REVIEW_MIN_LAUNCHES}}` times (suggested: 5)
+- At least `{{REVIEW_MIN_DAYS}}` days have passed since install (suggested: 7)
+- The user has **not** just encountered an error or paywall
+
+### Implementation
+
+```swift
+import StoreKit
+
+// In your ViewModel or AppState
+@Environment(\.requestReview) private var requestReview
+
+func considerRequestingReview() {
+    let launches = UserDefaults.standard.integer(forKey: StorageKeys.launchCount)
+    let installDate = UserDefaults.standard.object(forKey: StorageKeys.installDate) as? Date ?? Date()
+    let daysSinceInstall = Calendar.current.dateComponents([.day], from: installDate, to: Date()).day ?? 0
+    let hasRated = UserDefaults.standard.bool(forKey: StorageKeys.hasRequestedReview)
+
+    guard !hasRated,
+          launches >= {{REVIEW_MIN_LAUNCHES}},
+          daysSinceInstall >= {{REVIEW_MIN_DAYS}} else { return }
+
+    requestReview()
+    UserDefaults.standard.set(true, forKey: StorageKeys.hasRequestedReview)
+}
+```
+
+Add to `StorageKeys`:
+```swift
+static let launchCount = "launchCount"
+static let installDate = "installDate"
+static let hasRequestedReview = "hasRequestedReview"
+```
+
+Increment `launchCount` and record `installDate` (once, if not already set) in the app entry point's `.onAppear`.
+
+### Rules &amp; Limits
+
+- Apple caps the prompt at **3 times per 365 days** — the guard flag prevents wasting that budget
+- Never call `requestReview` in response to a direct user action (e.g., a button tap) — it must be developer-initiated at a natural pause
+- In Settings &gt; About, also provide a direct **"Rate on the App Store"** link as a fallback: `https://apps.apple.com/app/id{{APP_STORE_ID}}?action=write-review`
+
+---
+
+## 13. Persistence
 
 ### UserDefaults Keys
 
@@ -284,7 +336,7 @@ Keychain for sensitive data (reward tracking, etc.)*
 
 ---
 
-## 13. Offline Behavior
+## 14. Offline Behavior
 
 ### Works Offline
 {{OFFLINE_AVAILABLE}}
@@ -302,7 +354,7 @@ Keychain for sensitive data (reward tracking, etc.)*
 
 ---
 
-## 14. Kids App Compliance (if applicable)
+## 15. Kids App Compliance (if applicable)
 
 {{KIDS_COMPLIANCE}}
 
@@ -319,7 +371,7 @@ Keychain for sensitive data (reward tracking, etc.)*
 
 ---
 
-## 15. Build Configuration &amp; Compliance
+## 16. Build Configuration &amp; Compliance
 
 ### Encryption Export Compliance
 
@@ -387,7 +439,7 @@ NSLocationWhenInUseUsageDescription, NSMicrophoneUsageDescription.*
 
 ---
 
-## 16. App Store Metadata
+## 17. App Store Metadata
 
 ### App Identity
 
@@ -489,7 +541,7 @@ Focus on discoverability. Avoid repeating words from app name.*
 
 ---
 
-## 17. Data &amp; Privacy Compliance
+## 18. Data &amp; Privacy Compliance
 
 - {{DATA_COLLECTION_POLICY}}
   *e.g., "No personal data collected" / "Location used on-device only"*
@@ -501,7 +553,7 @@ Focus on discoverability. Avoid repeating words from app name.*
 
 ---
 
-## 18. Implementation Priority
+## 19. Implementation Priority
 
 ### Phase 1: Core Experience
 {{PHASE_1_TASKS}}
@@ -522,7 +574,7 @@ Focus on discoverability. Avoid repeating words from app name.*
 
 ---
 
-## 19. Build &amp; Release Checklist
+## 20. Build &amp; Release Checklist
 
 ### Pre-Submission
 - [ ] All core features functional and tested
@@ -550,7 +602,7 @@ Focus on discoverability. Avoid repeating words from app name.*
 
 ---
 
-## 20. App Entry Point
+## 21. App Entry Point
 
 ```swift
 // Note: the struct name must be valid Swift — PascalCase, no spaces or hyphens.
@@ -577,7 +629,7 @@ struct {{APP_NAME}}App: App {
 
 ---
 
-## 21. Deliverable
+## 22. Deliverable
 
 A complete, buildable Xcode project with:
 - All core functionality implemented
@@ -590,7 +642,7 @@ A complete, buildable Xcode project with:
 
 ---
 
-## 22. Placeholder Reference
+## 23. Placeholder Reference
 
 Before submission, search the project for `{{` and replace all placeholders:
 
@@ -604,7 +656,7 @@ Before submission, search the project for `{{` and replace all placeholders:
 
 ---
 
-## 23. Notes
+## 24. Notes
 
 {{ADDITIONAL_NOTES}}
 
