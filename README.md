@@ -1,52 +1,30 @@
+Here's the updated README you can copy over:
+
+```markdown
 # iOS App Genesis Mega Prompt
 
 A comprehensive 23-section template for building iOS apps with AI coding assistants like Claude Code, Codex, or Gemini.
 
 ## What is This?
 
-This is a "genesis prompt" - a structured template that covers all the bases needed to build a complete iOS app from scratch. Feed this to your AI coding assistant after filling in the `{{ }}` placeholders with your app-specific details, and it can one-shot your full app.
+This is a "genesis prompt" — a structured template that covers all the bases needed to build a complete iOS app from scratch. Fill in the `{{ }}` placeholders with your app-specific details and feed it to your AI coding assistant.
 
-The prompt covers:
+There are two versions:
 
-- Project overview and technical requirements
-- Design system (colors, typography, spacing, animations)
-- App structure and data models
-- Screen specifications
-- StoreKit 2 In-App Purchase configuration
-- Ad monetization (if applicable)
-- Core features and content specification
-- Settings, persistence, and offline behavior
-- Kids App compliance (if applicable)
-- Build configuration and Info.plist settings
-- Complete App Store metadata
-- Privacy and data compliance
-- Implementation phases and release checklist
+- **Full version** (`ios-genesis-mega-prompt.md`) — 23 sections covering everything from design system to App Store metadata, compliance, and release checklist. Best for larger models and one-shot full apps.
+- **Simplified version** (`ios-genesis-prompt-xs.md`) — condensed version focused on generating working SwiftUI code. Designed for local models (especially under ~9B) and the "Local AI Coding" series tests.
 
 ## How to Use
 
-1. **Brainstorm first** - Use a reasoning model (like Claude) to research and brainstorm your app idea. I use my [Assess Decide Do framework skills](https://github.com/dragosroua/add-framework-skills) for this.
+1. **Brainstorm first** — Use a reasoning model (like Claude) to research and brainstorm your app idea. I use my Assess Decide Do framework skills for this.
+2. **Fill the template** — Once you have a clear picture of your app (design, monetization, compliance requirements), have the LLM interpolate all the `{{ }}` placeholders.
+3. **Feed to your code builder** — Take the completed prompt and feed it to Claude Code (or your preferred AI coding tool), or to a local model for the XS version.
+4. **Iterate** — Build in small, atomic features. Commit aggressively with Git.
 
-2. **Fill the template** - Once you have a clear picture of your app (design, monetization, compliance requirements), have the LLM interpolate all the `{{ }}` placeholders in the genesis prompt.
+## The Prompts
 
-3. **Feed to your code builder** - Take the completed `prompt.md` and feed it to Claude Code (or your preferred AI coding tool).
+- Full 23-section template: [ios-genesis-mega-prompt.md](ios-genesis-mega-prompt.md)
+- Simplified XS version (for local models): [ios-genesis-prompt-xs.md](ios-genesis-prompt-xs.md)
 
-4. **Iterate** - Build in small, atomic features. Commit aggressively with Git.
-
-## The Prompt
-
-See [ios-genesis-mega-prompt.md](ios-genesis-mega-prompt.md) for the full template.
-
-## Background
-
-This genesis prompt evolved from building multiple iOS apps using AI coding assistants. Every time I encountered a time-consuming detail (like the `ITSAppUsesNonExemptEncryption` setting that blocks TestFlight builds), I added it back to the template so the next app would have it covered from the start.
-
-For the full story and lessons learned, read the blog posts: 
-- [Vibe Coding iOS Apps on my iPad with Claude, from my Favorite Coffee Shop](https://dragosroua.com/vibe-coding-ios-apps-on-my-ipad-with-claude-from-my-favorite-coffee-shop/)
-- [Lessons Learned While Vibe Coding an iOS APP in 7 Days, from Idea to AppStore - Genesis Prompt Inside](https://dragosroua.com/lessons-learned-while-vibe-coding-an-ios-app-in-7-days-from-idea-to-app-store-genesis-prompt-inside/)
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Author
-
-[Dragos Roua](https://dragosroua.com)
+The XS version is used in the Local AI Coding series (testing small post-trained and distilled models on generating iOS apps). Videos and notes will be linked here as they are published.
+```
